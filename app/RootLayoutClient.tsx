@@ -2,6 +2,26 @@
 
 import { useEffect, useState } from 'react';
 import LogoPreloader from './components/LogoPreloader';
+import MolecularBackground from './components/MolecularBackground';
+import ThemeToggle from './components/ThemeToggle';
+import { ThemeProvider } from './context/ThemeContext';
+
+function RootLayoutContent({ children, isLoading }: { children: React.ReactNode; isLoading: boolean }) {
+  return (
+    <>
+      <MolecularBackground />
+      <ThemeToggle />
+      {isLoading && (
+        <div className="fixed inset-0 z-50 bg-white dark:bg-black">
+          <LogoPreloader />
+        </div>
+      )}
+      <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
+        {children}
+      </div>
+    </>
+  );
+}
 
 export default function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,15 +46,8 @@ export default function RootLayoutClient({ children }: { children: React.ReactNo
   }, []);
 
   return (
-    <>
-      {isLoading && (
-        <div className="fixed inset-0 z-50 bg-white">
-          <LogoPreloader />
-        </div>
-      )}
-      <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
-        {children}
-      </div>
-    </>
+    <ThemeProvider>
+      <RootLayoutContent isLoading={isLoading}>{children}</RootLayoutContent>
+    </ThemeProvider>
   );
 }
