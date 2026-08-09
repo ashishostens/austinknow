@@ -1,0 +1,19 @@
+.wolf-illustration {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  transition: filter 0.3s ease;
+}
+
+:root[data-theme='dark'] .wolf-illustration {
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.15));
+}
+
+.wolf-illustration:hover {
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.2));
+}
+
+:root[data-theme='dark'] .wolf-illustration:hover {
+  filter: drop-shadow(0 6px 16px rgba(255, 255, 255, 0.25));
+}
