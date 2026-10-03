@@ -1,39 +1,67 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-display: var(--font-display), 'Plus Jakarta Sans', sans-serif;
+  --font-sans: var(--font-sans), 'Inter', sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+  
+  --color-brand-primary: #3b82f6; /* Modern Electric Blue */
+  --color-brand-secondary: #8b5cf6; /* Vibrant Violet */
+  --color-brand-accent: #06b6d4; /* Neon Cyan */
+  --color-brand-teal: #14b8a6; /* Medical Sciences Teal */
+  --color-brand-rose: #f43f5e; /* Design Coral Rose */
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --bg: #ffffff;
-  --text: #000000;
-  --text-secondary: #666666;
-}
-
-:root[data-theme='dark'] {
-  --background: #1a1a1a;
-  --foreground: #e5e5e5;
-  --bg: #1a1a1a;
-  --text: #ffffff;
-  --text-secondary: #b0b0b0;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #050505; /* True OLED Deep Black */
+  --foreground: #ffffff; /* Crisp Stark White */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Atmospheric Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.08); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 9s ease-in-out infinite;
 }
